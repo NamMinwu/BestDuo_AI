@@ -1,0 +1,16 @@
+.env
+.env.local
+*.pyc
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.DS_Store
+.idea/
+.vscode/
+ollama_models/

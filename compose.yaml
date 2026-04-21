@@ -1,0 +1,26 @@
+# bestduo_AI 로컬 개발용 compose
+# - ollama 는 호스트 머신에서 직접 돌리는 것을 기본으로 함 (M-시리즈 Metal GPU 활용)
+# - postgres / redis 만 컨테이너로 띄움
+# - FastAPI 도 호스트에서 `uv run uvicorn app.main:app --reload` 로 돌리는 것을 권장
+#
+# Spring BE 쪽 compose 와 포트 충돌 방지를 위해 5433, 6380 으로 offset
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5433:5432"
+    volumes:
+      - bestduo_ai_pg:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]
+    ports:
+      - "6380:6379"
+
+volumes:
+  bestduo_ai_pg:

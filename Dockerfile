@@ -21,7 +21,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
     OLLAMA_MAX_LOADED_MODELS=1
 
 RUN apt-get update \
- && apt-get install -y --no-install-recommends curl ca-certificates \
+ && apt-get install -y --no-install-recommends curl ca-certificates zstd \
  && curl -fsSL https://ollama.com/install.sh | sh \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*

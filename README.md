@@ -15,16 +15,22 @@ Railway 위에서 동작하며, 아래 요소로 구성된다.
 
 ---
 
-## Phase 1 범위 (현재)
+## Phase 현황
+
+- [x] **Phase 1** — FastAPI + Ollama sidecar, `/health`·`/metrics`, Railway 배포 + public domain verify 완료
+- [ ] **Phase 2** — `champion_tags.json` + Intent Classifier + Entity Extractor + SQL 템플릿 + `POST /nlp/query` + Spring `FastApiNlpAdapter`
+- [ ] **Phase 3** — `/nlp/explain` LLM 경로 + 환각 방어
+- [ ] **Phase 4** — Prometheus 메트릭 + Resilience4j 연계 + Rate limit
+- [ ] **Phase 5** — Human Eval (50 쿼리) + Ablation
+
+### Phase 1 세부 체크리스트
 
 - [x] FastAPI 스켈레톤 (`/health`, `/metrics`)
 - [x] Ollama / Redis / Postgres 클라이언트 + 헬스 프로브
-- [x] Dockerfile (ollama + fastapi 한 컨테이너)
-- [x] Railway 배포용 entrypoint (모델 pull + warm-up)
-- [ ] Phase 2: Intent Classifier + Entity Extractor + SQL 템플릿 라우팅
-- [ ] Phase 3: `/nlp/explain` LLM 경로 + 환각 방어
-- [ ] Phase 4: Prometheus 메트릭 + Resilience4j 연계 + Rate limit
-- [ ] Phase 5: Human Eval (50 쿼리) + Ablation + 경력기술서 반영
+- [x] Dockerfile (ollama + fastapi 한 컨테이너, `zstd` 포함)
+- [x] Railway entrypoint (모델 pull + warm-up + uvicorn)
+- [x] Railway 배포 Active, Volume 마운트 (`/root/.ollama`), `${{ Postgres.DATABASE_URL }}` 치환
+- [x] Public domain `/health` 전 구성요소 `up` 확인
 
 ---
 
